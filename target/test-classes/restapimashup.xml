@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
+	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking"
+	xmlns:https="http://www.mulesoft.org/schema/mule/https"
+	xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
+	xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/https http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+	<spring:beans>
+		<context:property-placeholder location="classpath:mule-dev.properties" />
+	</spring:beans>
+	<http:connector name="HTTP_HTTPS" cookieSpec="netscape"
+		validateConnections="true" sendBufferSize="0" receiveBufferSize="0"
+		receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000"
+		socketSoLinger="0" doc:name="HTTP-HTTPS" />
+	<catch-exception-strategy name="Catch_Exception_Strategy">
+        <choice doc:name="Choice">
+        <when expression="#[payload == &quot;&quot;]">
+				 <set-payload
+			value="{&quot;error&quot;:&quot;400&quot;,&quot;message&quot;:&quot;Please provide a APIKEY in json request&quot;}"
+			doc:name="Set Payload" />
+			</when>
+			<otherwise>
+			<set-payload
+			value="{&quot;error&quot;:&quot;121&quot;,&quot;message&quot;:&quot;System Intergration Error&quot;}"
+			doc:name="Set Payload" />
+        
+			</otherwise>
+		</choice>
+		<json:object-to-json-transformer doc:name="Object to JSON"/>
+		<logger level="INFO" doc:name="Logger" />
+	</catch-exception-strategy>
+	<flow name="getTopTrackCompleteInfo" doc:name="getTopTrackCompleteInfo">
+		<http:inbound-endpoint exchange-pattern="request-response"
+			host="${HOST}" port="${PORT}" path="getTopTrackCompleteInfo"
+			doc:name="HTTP" responseTimeout="100000"/>
+		<object-to-string-transformer doc:name="Object to String" />
+		<set-variable variableName="firstpayload" value="#[payload]"
+			doc:name="Variable" />
+		<set-variable variableName="apiKey" value="#[json:apiKey]"
+			doc:name="Variable" />
+		<http:outbound-endpoint exchange-pattern="request-response"
+			host="ws.audioscrobbler.com" port="80"
+			path="2.0/?method=chart.gettoptracks&amp;api_key=#[flowVars.apiKey]&amp;format=json&amp;limit=1"
+			method="POST" doc:name="HTTP" />
+		<json:json-to-object-transformer
+			doc:name="JSON to Object" returnClass="java.util.Map" />
+		<choice doc:name="Choice">
+			<when expression="payload.get(&quot;error&quot;) !=null">
+				<json:object-to-json-transformer
+					doc:name="Object to JSON" />
+				<logger level="INFO" doc:name="Logger" />
+			</when>
+			<otherwise>
+				<set-variable variableName="topTrackInfo" value="#[payload]"
+					doc:name="Variable" />
+				<set-variable variableName="artistName"
+					value="#[payload.get(&quot;tracks&quot;).get(&quot;track&quot;).get(&quot;artist&quot;).get(&quot;name&quot;)]"
+					doc:name="Variable" />
+				<set-payload value="#[flowVars.firstpayload]" doc:name="Set Payload" />
+				<flow-ref name="getArtistInfo" doc:name="Flow Reference" />
+				<json:json-to-object-transformer
+					doc:name="JSON to Object" returnClass="java.util.Map" />
+				<set-variable variableName="artistProfile" value="#[payload]"
+					doc:name="Variable" />
+				<set-payload doc:name="Set Payload" value="#[null]" />
+				<flow-ref name="getMusicBrainzRank" doc:name="Flow Reference" />
+				<json:json-to-object-transformer
+					doc:name="JSON to Object" />
+				<set-variable variableName="artistRank" value="#[json:artists[0]/score]"
+					doc:name="Variable" />
+				<component class="com.pandora.ConsolidateOutputHelper" doc:name="Java" />
+				<json:object-to-json-transformer
+					doc:name="Object to JSON" />
+				<logger level="INFO" doc:name="Logger" />
+
+			</otherwise>
+		</choice>
+        <exception-strategy ref="Catch_Exception_Strategy" doc:name="Reference Exception Strategy"/>
+
+	</flow>
+	<sub-flow name="getArtistInfo" doc:name="getArtistInfo">
+		<http:outbound-endpoint exchange-pattern="request-response"
+			host="ws.audioscrobbler.com" port="80"
+			path="2.0/?method=artist.getinfo&amp;artist=Cher&amp;api_key=#[flowVars.apiKey]&amp;format=json"
+			method="GET" doc:name="HTTP" />
+	</sub-flow>
+	<sub-flow name="getMusicBrainzRank" doc:name="getMusicBrainzRank">
+		<http:outbound-endpoint exchange-pattern="request-response"
+			host="musicbrainz.org" port="80" method="GET" doc:name="HTTP"
+			path="ws/2/artist/?query=artist=#[flowVars.artistName]&amp;fmt=json&amp;limit=1" />
+	</sub-flow>
+</mule>

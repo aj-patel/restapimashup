@@ -1,0 +1,24 @@
+<plugin
+   id="com.opensys.clover.lookup"
+   version="3.4.4"
+   provider-name="Javlin a.s.">
+
+	<runtime>
+		<library path="cloveretl.lookup.commercial.jar"/>
+		<library path="lib/jdbm-1.0.jar"/>
+   	</runtime> 
+    
+	<requires engine-version="3.4.4">
+	</requires>
+
+	<extension point-id="lookup">
+		<parameter id="type" value="persistentLookup"/>
+		<parameter id="className" value="com.opensys.cloveretl.lookup.PersistentLookupTable"/>
+	</extension>
+
+    <extension point-id="lookup">
+        <parameter id="type" value="aspellLookup"/>
+        <parameter id="className" value="com.opensys.cloveretl.lookup.AspellLookupTable"/>
+    </extension>
+
+</plugin>

@@ -1,0 +1,21 @@
+<plugin
+   id="com.opensys.cloveretl.compiler"
+   version="3.4.4"
+   provider-name="Javlin a.s.">
+
+	<runtime>
+		<library path="cloveretl.compiler.commercial.jar"/>
+   	</runtime> 
+
+	<requires engine-version="3.4.4">
+		<import plugin-id="org.jetel.connection"/>
+		<import plugin-id="org.jetel.lookup"/>
+	</requires>
+
+	<extension point-id="tlCompiler">
+		<parameter id="type" value="bytecode.compiler"/>
+		<parameter id="className" value="com.opensys.cloveretl.ctl.BytecodeCompiler"/>
+		<parameter id = "priority" value = "1"/>
+	</extension>
+	
+</plugin>

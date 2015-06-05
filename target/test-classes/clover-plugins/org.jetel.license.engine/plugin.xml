@@ -1,0 +1,12 @@
+<plugin
+   id="org.jetel.license"
+   version="3.4.4"
+   provider-name="Javlin a.s."
+   class="org.jetel.license.Activator">
+
+	<runtime>
+		<library path="cloveretl.license.engine.jar"/>
+		<library path="lib/cloveretl.license.jar"/>
+   	</runtime> 
+
+</plugin>

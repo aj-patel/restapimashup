@@ -1,0 +1,22 @@
+<plugin
+        id="com.mulesoft.datamapper.mule-plugins"
+        version="3.4.0"
+        provider-name="MuleSoft">
+
+    <runtime>
+        <library path="mule-clover-plugins.jar"/>
+    </runtime>
+
+    <extension point-id="lookup">
+        <parameter id="type" value="muleFlowLookup"/>
+        <parameter id="className" value="com.mulesoft.datamapper.lookup.MuleFlowLookupTable"/>
+    </extension>
+
+
+    <extension point-id="ctlfunction">
+        <parameter id="libraryName" value="calendar"/>
+        <parameter id="className" value="com.mulesoft.datamapper.function.CalendarLib"/>
+    </extension>
+
+
+</plugin>

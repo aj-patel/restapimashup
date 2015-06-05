@@ -1,0 +1,21 @@
+<plugin
+   id="com.opensys.cloveretl.tlfunction"
+   version="3.4.4"
+   provider-name="Javlin a.s.">
+
+	<runtime>
+		<library path="cloveretl.tlfunction.commercial.jar"/>
+   	</runtime> 
+
+	<extension point-id="tlfunction">
+		<parameter id="libraryName" value="string"/>
+		<parameter id="className" value="com.opensys.cloveretl.interpreter.extensions.StringLib"/>
+		<parameter id="function">
+			<value>soundex</value>
+			<value>edit_distance</value>
+			<value>metaphone</value>
+			<value>NYSIIS</value>
+		</parameter>
+	</extension>
+
+</plugin>

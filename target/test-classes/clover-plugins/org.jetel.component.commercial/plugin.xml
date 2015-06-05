@@ -1,0 +1,283 @@
+<plugin
+   id="com.opensys.clover.component"
+   version="3.4.4"
+   provider-name="Javlin a.s.">
+
+	<runtime>
+		<library path="cloveretl.component.commercial.jar"/>
+		<library path="lib/mail-1.4.2.jar"/>
+		<library path="lib/activation-1.1.jar"/>
+		<library path="lib/axiom-api-1.2.12.jar"/>
+		<library path="lib/axiom-dom-1.2.12.jar"/>
+		<library path="lib/axiom-impl-1.2.12.jar"/>
+		<library path="lib/axis2-adb-1.5.6.jar"/>
+		<library path="lib/axis2-jaxws-1.5.6.jar"/>
+		<library path="lib/axis2-kernel-1.5.6.jar"/>
+		<library path="lib/axis2-transport-http-1.5.6.jar"/>
+		<library path="lib/axis2-transport-local-1.5.6.jar"/>
+		<library path="lib/commons-fileupload-1.2.1.jar"/>
+		<library path="lib/commons-io-1.4.jar"/>
+		<library path="lib/commons-jxpath-1.3.jar"/>
+		<library path="lib/commons-beanutils-core-1.8.3.jar"/>
+		<library path="lib/dnsjava-2.0.6.jar"/>
+		<library path="lib/httpcore-4.2.2.jar"/>
+		<library path="lib/httpclient-4.2.2.jar"/>
+		<library path="lib/httpmime-4.2.2.jar"/>
+		<library path="lib/jsr181-api.jar"/>
+		<library path="lib/neethi-2.0.5.jar"/>
+		<library path="lib/stax-1.2.0.jar"/>
+		<library path="lib/woden-api-1.0M8.jar"/>
+		<library path="lib/wsdl4j-1.6.2.jar"/>
+		<library path="lib/XmlSchema-1.4.7-modified-for-WSC.jar"/>
+		<library path="lib/jackson-core-asl-1.9.3.jar"/>
+		<library path="lib/jcifs-1.3.17.jar"/>
+   	</runtime> 
+
+	<requires engine-version="3.4.4">
+		<import plugin-id="org.jetel.component"/>
+		<import plugin-id="org.jetel.sequence"/>
+		<import plugin-id="org.jetel.license"/>
+		<import plugin-id="org.jetel.hadoop"/>
+	</requires>
+	
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.EmailFilter"/>
+		<parameter id="type" value="EMAIL_FILTER"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.EmailSender"/>
+		<parameter id="type" value="EMAIL_SENDER"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.EmailReader"/>
+		<parameter id="type" value="EMAIL_READER"/>
+	</extension>
+
+	<extension point-id="component">
+	    <parameter id="className" value="com.opensys.cloveretl.component.FastSort"/>
+	    <parameter id="type" value="FAST_SORT"/>
+	</extension>
+	
+	<extension point-id="component">
+	    <parameter id="className" value="com.opensys.cloveretl.component.MetaPivot"/>
+	    <parameter id="type" value="META_PIVOT"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.MultiLevelReader"/>
+		<parameter id="type" value="MULTI_LEVEL_READER"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.RelationalJoin"/>
+		<parameter id="type" value="RELATIONAL_JOIN"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.ParallelReader"/>
+		<parameter id="type" value="PARALLEL_READER"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.ClusterPartition"/>
+		<parameter id="type" value="CLUSTER_PARTITION"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.ClusterSimpleGather"/>
+		<parameter id="type" value="CLUSTER_SIMPLE_GATHER"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.ClusterMerge"/>
+		<parameter id="type" value="CLUSTER_MERGE"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.ClusterSimpleCopy"/>
+		<parameter id="type" value="CLUSTER_SIMPLE_COPY"/>
+	</extension>
+
+	<extension point-id="component">
+	    <parameter id="className" value="com.opensys.cloveretl.component.WebServiceClient"/>
+	    <parameter id="type" value="WEB_SERVICE_CLIENT"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.complexdatareader.ComplexDataReader"/>
+		<parameter id="type" value="COMPLEX_DATA_READER"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.DataSampler"/>
+		<parameter id="type" value="DATA_SAMPLER"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.Pivot"/>
+		<parameter id="type" value="PIVOT"/>
+	</extension>
+
+    <extension point-id="component">
+        <parameter id="className" value="com.opensys.cloveretl.component.SpreadsheetReader"/>
+        <parameter id="type" value="SPREADSHEET_READER"/>
+    </extension>
+      
+    <extension point-id="component">
+        <parameter id="className" value="com.opensys.cloveretl.component.SpreadsheetWriter"/>
+        <parameter id="type" value="SPREADSHEET_WRITER"/>
+    </extension>
+    
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.BeanReader"/>
+		<parameter id="type" value="BEAN_READER"/>
+	</extension>
+      
+    <extension point-id="component">
+	    <parameter id="className" value="com.opensys.cloveretl.component.BeanWriter"/>
+	    <parameter id="type" value="BEAN_WRITER"/>
+	</extension>
+	
+	<extension point-id="component">
+	    <parameter id="className" value="com.opensys.cloveretl.component.MapWriter"/>
+	    <parameter id="type" value="MAP_WRITER"/>
+	</extension>
+	
+	<extension point-id="component">
+	    <parameter id="className" value="com.opensys.cloveretl.component.JsonReader"/>
+	    <parameter id="type" value="JSON_READER"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.JsonWriter"/>
+		<parameter id="type" value="JSON_WRITER"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.ExecuteGraph"/>
+		<parameter id="type" value="EXECUTE_GRAPH"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.ExecuteJobflow"/>
+		<parameter id="type" value="EXECUTE_JOBFLOW"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.MonitorGraph"/>
+		<parameter id="type" value="MONITOR_GRAPH"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.MonitorJobflow"/>
+		<parameter id="type" value="MONITOR_JOBFLOW"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.ExecuteScript"/>
+		<parameter id="type" value="EXECUTE_SCRIPT"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.KillGraph"/>
+		<parameter id="type" value="KILL_GRAPH"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.KillJobflow"/>
+		<parameter id="type" value="KILL_JOBFLOW"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.Fail"/>
+		<parameter id="type" value="FAIL"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.SetJobOutput"/>
+		<parameter id="type" value="SET_JOB_OUTPUT"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.GetJobInput"/>
+		<parameter id="type" value="GET_JOB_INPUT"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.TokenGather"/>
+		<parameter id="type" value="TOKEN_GATHER"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.Barrier"/>
+		<parameter id="type" value="BARRIER"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.Condition"/>
+		<parameter id="type" value="CONDITION"/>
+	</extension>
+
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.Success"/>
+		<parameter id="type" value="SUCCESS"/>
+	</extension>
+	
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.Combine"/>
+		<parameter id="type" value="COMBINE"/>
+	</extension>
+	
+	<extension point-id="component">
+	    <parameter id="className" value="com.opensys.cloveretl.component.ListFiles"/>
+	    <parameter id="type" value="LIST_FILES"/>
+	</extension>
+
+	<extension point-id="component">
+	    <parameter id="className" value="com.opensys.cloveretl.component.CreateFiles"/>
+	    <parameter id="type" value="CREATE_FILES"/>
+	</extension>
+
+	<extension point-id="component">
+	    <parameter id="className" value="com.opensys.cloveretl.component.DeleteFiles"/>
+	    <parameter id="type" value="DELETE_FILES"/>
+	</extension>
+
+	<extension point-id="component">
+	    <parameter id="className" value="com.opensys.cloveretl.component.CopyFiles"/>
+	    <parameter id="type" value="COPY_FILES"/>
+	</extension>
+
+	<extension point-id="component">
+	    <parameter id="className" value="com.opensys.cloveretl.component.MoveFiles"/>
+	    <parameter id="type" value="MOVE_FILES"/>
+	</extension>
+	
+	<extension point-id="component">
+	    <parameter id="className" value="com.opensys.cloveretl.component.LoadBalancingPartition"/>
+	    <parameter id="type" value="LOAD_BALANCING_PARTITION"/>
+	</extension>
+
+	<extension point-id="component">
+	    <parameter id="className" value="com.opensys.cloveretl.component.ClusterLoadBalancingPartition"/>
+	    <parameter id="type" value="CLUSTER_LOAD_BALANCING_PARTITION"/>
+	</extension>
+
+	<extension point-id="component">
+	    <parameter id="className" value="com.opensys.cloveretl.component.ClusterRepartition"/>
+	    <parameter id="type" value="CLUSTER_REPARTITION"/>
+	</extension>
+
+	<extension point-id="component">
+	    <parameter id="className" value="com.opensys.cloveretl.component.ClusterRegather"/>
+	    <parameter id="type" value="CLUSTER_REGATHER"/>
+	</extension>
+	
+	<extension point-id="component">
+		<parameter id="className" value="com.opensys.cloveretl.component.ExecuteMapReduce"/>
+		<parameter id="type" value="EXECUTE_MAPREDUCE"/>
+	</extension>
+	
+</plugin>

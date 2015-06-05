@@ -1,0 +1,15 @@
+<plugin
+   id="com.opensys.cloveretl.ctlfunction"
+   version="3.4.4"
+   provider-name="Javlin a.s.">
+
+	<runtime>
+		<library path="cloveretl.ctlfunction.commercial.jar"/>
+   	</runtime> 
+
+	<extension point-id="ctlfunction">
+		<parameter id="libraryName" value="string"/>
+		<parameter id="className" value="com.opensys.cloveretl.ctl.extensions.StringLib"/>
+	</extension>
+	
+</plugin>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <unzip dest="E:\Workspace-Mule-new\restapimashup\target\test-classes" src="E:\Workspace-Mule-new\restapimashup\target\test-classes/cloveretl-engine.zip"/>
+</target>
+</project>
