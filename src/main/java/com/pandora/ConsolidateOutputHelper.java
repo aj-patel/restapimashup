@@ -11,7 +11,7 @@ import org.mule.api.lifecycle.Callable;
 import org.mule.api.transport.PropertyScope;
 /***
 * @author ajpatel
-* Java component which converts which collects the response from each webservice end point and keeps only the information
+* Java component which converts the response from each webservice end point and keeps only the information
 * needed as API output.
 */
 public class ConsolidateOutputHelper implements Callable{
